@@ -1,6 +1,6 @@
 <?php
 $qqapi="http://emby.cname.info:5700"; //不要加后面的斜杠
-echo file_get_contents("../.env");
+echo file_get_contents("../../.env");
 // API安全
 if ($_SERVER['REQUEST_METHOD']!="POST"){
     exit("{\"code\":405,\"msg\":\"不支持的请求方式\"}");

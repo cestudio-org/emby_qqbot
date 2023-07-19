@@ -1,8 +1,5 @@
 <?php
 $qqapi="http://emby.cname.info:5700"; //不要加后面的斜杠
-$a = file_put_contents('./logs.txt', $_POST,FILE_APPEND);
-
-// $debug = file_put_contents('./logs.txt', "DEV001",FILE_APPEND);
 
 // API安全
 if ($_SERVER['REQUEST_METHOD']!="POST"){
@@ -16,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD']!="POST"){
 // 判断Event
 $data = json_decode($_POST['data'],true);
 var_dump($_POST);
-$a = file_put_contents('./logs.txt', $data['Date'],FILE_APPEND);
 $method = $data['Event'];
 switch ($method){
     case 'system.webhooktest':

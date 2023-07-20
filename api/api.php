@@ -51,9 +51,12 @@ switch ($method){
 }
 
 $base = $qqapi . "/send_group_msg?group_id=$group_id&message=";
+
+
+
 $context = stream_context_create(array(
     'http' => array(
-        'header'  => "Authorization: Basic " . base64_encode($accesstoken)
+        'header'  => "Authorization: Bearer " . $accesstoken
     )
 ));
 exit(file_get_contents($base . urlencode($message), false, $context));

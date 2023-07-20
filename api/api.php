@@ -1,5 +1,7 @@
 <?php
 $qqapi=getenv('QQAPI'); //不要加后面的斜杠
+$accesstoken = getenv('ACCESSTOKEN');
+
 // API安全
 if ($_SERVER['REQUEST_METHOD']!="POST"){
     exit("{\"code\":405,\"msg\":\"不支持的请求方式\"}");
@@ -49,5 +51,10 @@ switch ($method){
 }
 
 $base = $qqapi . "/send_group_msg?group_id=$group_id&message=";
-exit(file_get_contents($base . urlencode($message)));
+$context = stream_context_create(array(
+    'http' => array(
+        'header'  => "Authorization: Basic " . base64_encode($accesstoken)
+    )
+));
+exit(file_get_contents($base . urlencode($message), false, $context));
 

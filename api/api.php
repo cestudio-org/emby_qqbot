@@ -1,6 +1,6 @@
 <?php
 $qqapi=getenv('QQAPI'); //不要加后面的斜杠
-$accesstoken = getenv('ACCESSTOKEN');
+$accesstoken = base64_decode(getenv('ACCESSTOKEN')); //不能加密，比较不安全，但是只能这样了
 
 // API安全
 if ($_SERVER['REQUEST_METHOD']!="POST"){

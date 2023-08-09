@@ -28,7 +28,7 @@ switch ($method){
         break;
 
     case 'library.new':
-        $message = "服务器添加了新的影视作品：\n" . $data['Description'];
+        $message = "服务器添加了新的影视作品：\n" . $data['Title'];
         break;
 
     case 'user.authenticated':

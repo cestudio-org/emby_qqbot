@@ -1,7 +1,8 @@
 <?php
 $qqapi=getenv('QQAPI'); //不要加后面的斜杠
 $accesstoken = base64_decode(getenv('ACCESSTOKEN')); //不能加密，比较不安全，但是只能这样了
-
+$tg_token=getenv('TGTOKEN');
+$tg_api = "https://api.telegram.org/bot";
 // API安全
 if ($_SERVER['REQUEST_METHOD']!="POST"){
     exit("{\"code\":405,\"msg\":\"不支持的请求方式\"}");
@@ -82,10 +83,13 @@ switch ($method){
     default:
         exit("{\"code\":404,\"msg\":\"Event not Found\"}");
 }
-
-$base = $qqapi . "/send_group_msg?group_id=$group_id&message=";
-
-
+if($_GET['type'] == "qq"){
+    $base = $qqapi . "/send_group_msg?group_id=$group_id&message=";
+}elseif ($_GET['type'] == "tg"){
+    $base = $tg_api . $tg_token . "/SendMessage?chat_id=$group_id&text=";
+}else{
+    exit("{\"code\":404,\"msg\":\"Type not Found\"}");
+}
 
 $context = stream_context_create(array(
     'http' => array(

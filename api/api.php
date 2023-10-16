@@ -83,13 +83,29 @@ switch ($method){
     default:
         exit("{\"code\":404,\"msg\":\"Event not Found\"}");
 }
-if($_GET['type'] == "qq"){
+if($_GET['type'] == "gocq"){
     $base = $qqapi . "/send_group_msg?group_id=$group_id&message=";
 }elseif ($_GET['type'] == "tg"){
     $base = $tg_api . $tg_token . "/SendMessage?chat_id=$group_id&text=";
+}elseif ($_GET['type'] == "chronocat"){
+    $base = $qqapi . "/v1/message.create";
+    $data = array(
+    'channel_id' => $group_id,
+    'content' => $message
+    );
+    $context = stream_context_create(array(
+    'http' => array(
+        'method'  => 'POST',
+        'header'  => 'Content-type: application/x-www-form-urlencoded',
+        'header'  => "Authorization: Bearer " . $accesstoken
+        'content' => http_build_query($data)
+    )
+    ));
+    exit(file_get_contents($base, false, $context));
 }else{
     exit("{\"code\":404,\"msg\":\"Type not Found\"}");
 }
+
 
 $context = stream_context_create(array(
     'http' => array(

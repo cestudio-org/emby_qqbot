@@ -97,9 +97,9 @@ if ($_GET['type'] == "gocq") {
     $context = stream_context_create(array(
         'http' => array(
             'method'  => 'POST',
-            'header'  => "Content-type: application/x-www-form-urlencoded\r\n" .
+            'header'  => "Content-Type: application/json" .
                          "Authorization: Bearer " . $accesstoken,
-            'content' => http_build_query(json_encode($data),true)
+            'content' => http_build_query($data)
         )
     ));
     exit(file_get_contents($base, false, $context));

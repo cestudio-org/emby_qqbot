@@ -1,6 +1,8 @@
 <?php
+// QQ群相关
 $qqapi = getenv('QQAPI'); // 不要加后面的斜杠
 $accesstoken = base64_decode(getenv('ACCESSTOKEN')); // 不能加密，比较不安全，但是只能这样了
+// TG Bot相关
 $tg_token = getenv('TGTOKEN');
 $tg_api = "https://api.telegram.org/bot";
 // API安全

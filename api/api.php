@@ -5,6 +5,9 @@ $accesstoken = base64_decode(getenv('ACCESSTOKEN')); // 不能加密，比较不
 // TG Bot相关
 $tg_token = getenv('TGTOKEN');
 $tg_api = "https://api.telegram.org/bot";
+// WeChat 相关
+$wxapi = getenv("WXAPI");
+
 // API安全
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
     exit("{\"code\":405,\"msg\":\"不支持的请求方式\"}");
@@ -105,7 +108,23 @@ if ($_GET['type'] == "gocq") {
         )
     ));
     exit(file_get_contents($base, false, $context));
-} else {
+} elseif ($_GET['type'] == "wx") {
+    $base = $wxapi . "/webhook/msg";
+    $data = array(
+        'to' => $group_id,
+        'type' =>"text",
+        'content' => $message
+    );
+    $context = stream_context_create(array(
+        'http' => array(
+            'method'  => 'POST',
+            'header'  => "Content-Type: application/json\r\n" .
+                         "Authorization: Bearer " . $accesstoken,
+            'content' => http_build_query($data)
+        )
+    ));
+    exit(file_get_contents($base, false, $context));
+} else{ 
     exit("{\"code\":404,\"msg\":\"Type not Found\"}");
 }
 

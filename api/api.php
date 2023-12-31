@@ -120,7 +120,7 @@ if ($_GET['type'] == "gocq") {
             'method'  => 'POST',
             'header'  => "Content-Type: application/json\r\n" .
                          "Authorization: Bearer " . $accesstoken,
-            'content' => http_build_query($data)
+            'content' => json_encode($data)
         )
     ));
     exit(file_get_contents($base, false, $context));

@@ -118,7 +118,7 @@ if ($_GET['type'] == "gocq") {
     $context = stream_context_create(array(
         'http' => array(
             'method'  => 'POST',
-            'header'  => "Content-Type: application/json\r\n" .
+            'header'  => "Content-Type: application/json",
             'content' => json_encode($data)
         )
     ));

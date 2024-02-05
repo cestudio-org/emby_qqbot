@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 }
 
 // 接受WebHook数据并数组化
-$data = json_decode(file_get_contents('php://input'));
+$data = json_decode(file_get_contents('php://input'),true);
 // 判断Event
 var_dump($data);
 $method = $data['Event'];

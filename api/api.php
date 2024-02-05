@@ -20,10 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 // 接受WebHook数据并数组化
 $data = json_decode(file_get_contents('php://input'),true);
 // 判断Event
-var_dump($data);
 $method = $data['Event'];
 switch ($method) {
-    // Webhook测试
+    // 发送测试通知
     case 'system.webhooktest': //测试
         $message = "测试成功力！！\n我工作在 " . $data['Server']['Name'] . " 上\n它的版本是：" . $data['Server']['Version'];
         break;
@@ -37,6 +36,12 @@ switch ($method) {
     // 媒体库
     case 'library.new': //新媒体已添加
         $message = "服务器添加了新的影视作品：\n" . $data['Title'] . "\n" . $data['Description'];
+        break;
+    case 'library.deleted': //删除了一个媒体
+        $message = "警告！服务器删除了一个影视作品：\n" . $data['Title'] . "\n" . $data['Description'];
+        break;
+    case 'library.subtitlesdownloaded': //已下载字幕
+        $message = "服务器一个影视作品下载了字幕：\n" . $data['Title'] . "\n" . $data['Description'];
         break;
     // 播放
     case 'playback.start': // 播放开始
@@ -52,15 +57,21 @@ switch ($method) {
         $message = $data['Title'];
         break;
     case 'user.authenticated': //已验证用户身份
-        $message = "有人成功登录了:\n" . $data['Title'];
+        $message = "警告！用户成功登录了，请注意非法登录并及时检查密码安全:\n" . $data['Title'];
         break;
     case 'user.authenticationfailed': //无法验证用户身份
-        $message = "有人登录失败了:\n" . $data['Title'];
+        $message = "警告！服务器出现用户登录失败，谨防DDos:\n" . $data['Title'];
+        break;
+    case 'user.lockedout': //用户被锁定
+        $message = "警告！服务器某用户被锁定！:\n" . $data['Title'];
         break;
     case 'user.created': //用户已创建
     case 'user.deleted': //用户已删除
     case 'user.passwordchanged': //密码已更改
         $message = $data['Title'];
+        break;
+    case 'user.policyupdated': //用户策略已更新
+        $message = "警告！服务器某用户的册罗已被更新！:\n" . $data['Title'];
         break;
     // 设备
     case 'devices.cameraimageuploaded': //相机图片已上传

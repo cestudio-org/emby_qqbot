@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
     exit("{\"code\":404,\"msg\":\"Group not Found\"}");
 }
 
+// 接受WebHook数据并数组化
+$data = json_decode(file_get_contents('php://input'));
 // 判断Event
-$data = json_decode($_POST, true);
-
 $method = $data['Event'];
 switch ($method) {
     // Webhook测试

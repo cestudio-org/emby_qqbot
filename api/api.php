@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 }
 
 // 判断Event
-$data = json_decode($_POST['data'], true);
-var_dump($_POST);
+$data = json_decode($_POST, true);
+
 $method = $data['Event'];
 switch ($method) {
     // Webhook测试

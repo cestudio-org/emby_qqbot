@@ -60,7 +60,7 @@ switch ($method) {
         $message = "警告！用户成功登录了，请注意非法登录并及时检查密码安全:\n" . $data['Title'];
         break;
     case 'user.authenticationfailed': //无法验证用户身份
-        $message = "警告！服务器出现用户登录失败，谨防DDos:\n" . $data['Title'];
+        $message = "警告！服务器出现用户登录失败，谨防DDoS:\n" . $data['Title'];
         break;
     case 'user.lockedout': //用户被锁定
         $message = "警告！服务器某用户被锁定！:\n" . $data['Title'];

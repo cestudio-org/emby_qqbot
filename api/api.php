@@ -24,14 +24,14 @@ $method = $data['Event'];
 switch ($method) {
     // 发送测试通知
     case 'system.webhooktest': //测试
-        $message = "测试成功力！！\n我工作在 " . $data['Server']['Name'] . " 上\n它的版本是：" . $data['Server']['Version'];
+        $message = "测试成功！！\相关信息 " . $data['Server']['Name'] . " 上\n它的版本是：" . $data['Server']['Version'];
         break;
     // 服务器
     case 'system.serverrestartrequired': //服务器需要重启
-        $message = "服务器需要重启力";
+        $message = "警告！服务器需要重启，请管理员及时处理";
         break;
     case 'system.updateavailable': //服务器有可用更新
-        $message = "服务器有可用更新力";
+        $message = "警告！服务器有可用更新，请管理员及时更新";
         break;
     // 媒体库
     case 'library.new': //新媒体已添加
@@ -66,12 +66,16 @@ switch ($method) {
         $message = "警告！服务器某用户被锁定！:\n" . $data['Title'];
         break;
     case 'user.created': //用户已创建
-    case 'user.deleted': //用户已删除
-    case 'user.passwordchanged': //密码已更改
-        $message = $data['Title'];
+        $message = "警告！服务器创建了一个用户，谨防提权攻击！:\n" . $data['Title'];
         break;
+    case 'user.deleted': //用户已删除
+        $message = "警告！服务器删除了一个用户，谨防误操作！:\n" . $data['Title'];
+        break;
+    case 'user.passwordchanged': //密码已更改
+        $message = "警告！服务器修改了一个用户的密码，谨防渗透攻击！:\n" . $data['Title'];
+        break;        break;
     case 'user.policyupdated': //用户策略已更新
-        $message = "警告！服务器某用户的册罗已被更新！:\n" . $data['Title'];
+        $message = "警告！服务器某用户的策略已被更新！:\n" . $data['Title'];
         break;
     // 设备
     case 'devices.cameraimageuploaded': //相机图片已上传
@@ -80,6 +84,7 @@ switch ($method) {
     // 插件
     case 'plugins.plugininstalled': //插件已安装
     case 'plugins.pluginuninstalled': //插件已卸载
+    case 'plugins.plugininstallfailed': //插件安装失败
     case 'plugins.pluginupdated': //插件已更新
         $message = $data['Title'];
         break;
@@ -90,6 +95,7 @@ switch ($method) {
     case 'livetv.seriestimercancelled': //电视剧录制已取消
     case 'livetv.recordingstarted': //录制已开始
     case 'livetv.recordingended': //录制已结束
+    case 'livetv.recordingerror': //录制失败
         $message = $data['Title'];
         break;
     // 外部

@@ -24,7 +24,7 @@ $method = $data['Event'];
 switch ($method) {
     // 发送测试通知
     case 'system.webhooktest': //测试
-        $message = "测试成功！！\相关信息 " . $data['Server']['Name'] . " 上\n它的版本是：" . $data['Server']['Version'];
+        $message = "测试成功！！\n相关信息 " . $data['Server']['Name'] . " 上\n它的版本是：" . $data['Server']['Version'];
         break;
     // 服务器
     case 'system.serverrestartrequired': //服务器需要重启
@@ -110,7 +110,7 @@ switch ($method) {
 if ($_GET['type'] == "gocq") {
     $base = $qqapi . "/send_group_msg?group_id=$group_id&message=";
 } elseif ($_GET['type'] == "tg") {
-    $base = $tg_api . $tg_token . "/SendMessage?chat_id=$group_id&text=";
+    $base = $tg_api . $tg_token . "/SendMessage?chat_id=$group_id&text=$message";
 } elseif ($_GET['type'] == "chronocat") {
     $base = $qqapi . "/v1/message.create";
     $data = array(

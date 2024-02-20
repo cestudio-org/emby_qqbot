@@ -110,7 +110,7 @@ switch ($method) {
 if ($_GET['type'] == "gocq") {
     $base = $qqapi . "/send_group_msg?group_id=$group_id&message=";
 } elseif ($_GET['type'] == "tg") {
-    $base = $tg_api . $tg_token . "/SendMessage?chat_id=$group_id&text=$message";
+    $base = $tg_api . $tg_token . "/SendMessage?chat_id=$group_id&text=";
 } elseif ($_GET['type'] == "chronocat") {
     $base = $qqapi . "/v1/message.create";
     $data = array(

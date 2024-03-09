@@ -129,7 +129,7 @@ if ($_GET['type'] == "gocq") {
 } elseif ($_GET['type'] == "wx") {
     $base = $wxapi . "/webhook/msg/v2?token=" . $wxapitoken;
     echo $base;
-    echo $group_id;
+    return $group_id;
     $data = array(
         'to' => $group_id,
         'isRoom' =>"true",

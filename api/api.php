@@ -140,6 +140,7 @@ if ($_GET['type'] == "gocq") {
             'content' => json_encode($data)
         )
     ));
+    echo json_encode($data);
     exit(file_get_contents($base, false, $context));
 } else{ 
     exit("{\"code\":404,\"msg\":\"Type not Found\"}");

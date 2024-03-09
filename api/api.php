@@ -130,8 +130,8 @@ if ($_GET['type'] == "gocq") {
     $base = $wxapi . "/webhook/msg/v2?token=" . $wxapitoken;
     $data = array(
         'to' => $group_id,
-        'isRoom' =>"true",
-        'data' => json_encode(array("type" => "text","content" => $message))
+        'isRoom' => true,
+        'data' => array("type" => "text","content" => $message)
     );
     $context = stream_context_create(array(
         'http' => array(
@@ -140,7 +140,7 @@ if ($_GET['type'] == "gocq") {
             'content' => json_encode($data)
         )
     ));
-    echo json_encode($data);
+    
     exit(file_get_contents($base, false, $context));
 } else{ 
     exit("{\"code\":404,\"msg\":\"Type not Found\"}");

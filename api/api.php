@@ -7,7 +7,7 @@ $tg_token = getenv('TGTOKEN');
 $tg_api = "https://api.telegram.org/bot";
 // WeChat 相关
 $wxapi = getenv("WXAPI");
-
+$wxapitoken = base64_decode(getenv('WX_API_TOKEN'));
 // API安全
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
     exit("{\"code\":405,\"msg\":\"不支持的请求方式\"}");
@@ -127,11 +127,13 @@ if ($_GET['type'] == "gocq") {
     ));
     exit(file_get_contents($base, false, $context));
 } elseif ($_GET['type'] == "wx") {
-    $base = $wxapi . "/webhook/msg";
+    $base = $wxapi . "/webhook/msg/v2?token=" . $wxapitoken;
     $data = array(
         'to' => $group_id,
-        'type' =>"text",
-        'content' => $message
+        'isRoom' =>"true",
+        'data' => array(
+            "content" => $message
+            )
     );
     $context = stream_context_create(array(
         'http' => array(

@@ -8,6 +8,7 @@ $tg_api = "https://api.telegram.org/bot";
 // WeChat 相关
 $wxapi = getenv("WXAPI");
 $wxapitoken = base64_decode(getenv('WX_API_TOKEN'));
+echo $wxapitoken;
 // API安全
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
     exit("{\"code\":405,\"msg\":\"不支持的请求方式\"}");

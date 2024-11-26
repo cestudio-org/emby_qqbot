@@ -35,13 +35,13 @@ switch ($method) {
         break;
     // 媒体库
     case 'library.new': //新媒体已添加
-        $message = "警告！服务器添加了新的影视作品,请管理员核实：\n" . $data['Title'] . "\n" . $data['Description'];
+        $message = "警告！服务器添加了新的影音作品,请管理员核实：\n" . $data['Title'] . "\n" . $data['Description'];
         break;
     case 'library.deleted': //删除了一个媒体
-        $message = "警告！服务器删除了一个影视作品,请管理员核实：\n" . $data['Title'] . "\n" . $data['Description'];
+        $message = "警告！服务器删除了一个影音作品,请管理员核实：\n" . $data['Title'] . "\n" . $data['Description'];
         break;
     case 'library.subtitlesdownloaded': //已下载字幕
-        $message = "服务器一个影视作品下载了字幕：\n" . $data['Title'] . "\n" . $data['Description'];
+        $message = "服务器一个影音作品下载了字幕：\n" . $data['Title'] . "\n" . $data['Description'];
         break;
     // 播放
     case 'playback.start': // 播放开始

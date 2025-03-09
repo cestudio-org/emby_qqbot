@@ -10,7 +10,7 @@ $wxapi = getenv("WXAPI");
 $wxapitoken = base64_decode(getenv('WX_API_TOKEN'));
 // API安全
 if ($_SERVER['REQUEST_METHOD'] != "POST") {
-    exit("{\"code\":405,\"msg\":\"不支持的请求方式\"}");
+    exit("{\"code\":405,\"msg\":\"不支持的请求方式！\"}");
 } elseif ($_GET['group_id']) {
     $group_id = $_GET['group_id'];
 } else {
